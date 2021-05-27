@@ -1,29 +1,25 @@
-```{r, eval=FALSE, include=TRUE}
-"Protocolo:
+## ---- eval=FALSE, include=TRUE----------------------------------------------------
+## "Protocolo:
+## 
+## 1. Daniel Felipe Villa Regifo
+## 
+## 2. Lenguaje: R
+## 
+## 3. Tema: Cree funciones que manejen Data Frames en R  (realice al menos dos ejercicios que requieran cargar archivos externos *.csv cada uno con al menos 50 filas y tres datos por fila, lea y procese la información del archvo leído, y guarde las respuestas a los ejercicios  en archivos independientes tipo *.txt)
+## 
+## 4. Fuentes:
+##    https://www.generatedata.com"
 
-1. Daniel Felipe Villa Regifo
 
-2. Lenguaje: R
-
-3. Tema: Cree funciones que manejen Data Frames en R  (realice al menos dos ejercicios que requieran cargar archivos externos *.csv cada uno con al menos 50 filas y tres datos por fila, lea y procese la información del archvo leído, y guarde las respuestas a los ejercicios  en archivos independientes tipo *.txt)
-
-4. Fuentes:
-   https://www.generatedata.com"
-```
-
-# Ejercicio 1°
-
-Eliminaremos datos NA del dataframe
-
-```{r}
+## ---------------------------------------------------------------------------------
 # Importamos la base
 data <- read.csv("Base.csv")
 
 # COnvertimos a dataframe:
 data <- data.frame(data)
-```
 
-```{r}
+
+## ---------------------------------------------------------------------------------
 rand.impute <- function(x) {
   # missing contiene un vector de valores T/F dependiendo del NA de x
   missing <- is.na(x)
@@ -39,9 +35,9 @@ rand.impute <- function(x) {
   return (imputed)
 }
 
-```
 
-```{r}
+
+## ---------------------------------------------------------------------------------
 random.impute.data.frame <- function(dataframe, cols){
   # Nombres del dataframe
   names <- names(dataframe)
@@ -55,35 +51,29 @@ random.impute.data.frame <- function(dataframe, cols){
   #Retorno el data frame
   return(dataframe)
 }
-```
 
 
-```{r}
+## ---------------------------------------------------------------------------------
 # las valore vacios los remplazo por Na para porder aplicar la funcion 
 data$Tipo_Cel[data$Tipo_Cel == ""] <- NA
 #Aplico la funcion
 data <- random.impute.data.frame(data, c(3))
-```
 
-```{r}
+
+## ---------------------------------------------------------------------------------
 #exportamos los datos:
 write.table(data, file="SinNA.txt", row.names = F)
-```
 
 
-# Ejercicio 2°
-Reescalermos los valores muy discontinuos de un dataframe (una empresa de inversión en trainding)
-
-```{r}
+## ---------------------------------------------------------------------------------
 #importamos la base
 base2 <- read.csv(file = "base2.csv", header = T, sep = ",")
 base2 <- data.frame(base2)
 
 base2$Estado_Civil <- as.factor(base2$Estado_Civil)
-```
 
 
-```{r}
+## ---------------------------------------------------------------------------------
 # intalamos un paquete para reescalar variables
 #install.packages("scales")
 # llamo la libreria
@@ -104,22 +94,14 @@ rescale.many <- function(dataframe, cols){
   cat(paste("Hemos reescalado ", length(cols), " variable(s)"))
   dataframe
 }
-```
 
 
-```{r}
+## ---------------------------------------------------------------------------------
 #Aplico la funcion
 base2 <- rescale.many(base2, c(2))
 
-```
 
 
-```{r}
+## ---------------------------------------------------------------------------------
 # Exportamos el archivo
 write.table(base2, file="Rescalar.txt", row.names = F)
-```
-
-```{r}
-library(knitr)
-purl("Dia_68_23mayo.Rmd", "main.r")
-```

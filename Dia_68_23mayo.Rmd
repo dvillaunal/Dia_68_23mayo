@@ -1,3 +1,14 @@
+---
+title: "Dia_68_23mayo"
+author: "Daniel Felipe Villa Rengifo"
+date: "27/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 ```{r, eval=FALSE, include=TRUE}
 "Protocolo:
 
@@ -119,7 +130,8 @@ base2 <- rescale.many(base2, c(2))
 write.table(base2, file="Rescalar.txt", row.names = F)
 ```
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 library(knitr)
 purl("Dia_68_23mayo.Rmd", "main.r")
 ```
+
